@@ -1,6 +1,7 @@
 class Timer {
   constructor() {
     this.stop = false;
+    this.countdown = null;
   }
 
   startTimer(duration, display) {
@@ -8,7 +9,8 @@ class Timer {
       hours,
       minutes,
       seconds;
-    let countdown = setInterval(function () {
+    console.log(`Start timer, current time: ${timer}`);
+    this.countdown = setInterval(function () {
       hours = parseInt(timer / 3600, 10);
       minutes = parseInt((timer % 3600) / 60, 10);
       seconds = parseInt(timer % 60, 10);
@@ -21,9 +23,11 @@ class Timer {
 
       if (--timer < 0) {
         alert(`Time's Up Loser!`);
-        clearInterval(countdown);
+        clearInterval(this.countdown);
       }
-      if (!this.stop) {
+
+      console.log(typeof this.stop);
+      if (this.stop === true) {
         console.log(`Here: should stop ${this.stop}, timer ${timer}`);
         clearInterval(countdown);
         return timer;
@@ -49,34 +53,37 @@ function returnText() {
   document.body.appendChild(countdownDiv);
 
   let totalTime = (60 * hoursInput + minutesInput) * 60;
+  let timerObject = new Timer();
 
-  let remainingTime;
+  let timerRunning = false;
 
   const checkIfUsing = setInterval(function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
       let currentTab = tabs[0];
       let currentTabUrl = new URL(currentTab.url);
       let currentTabHostname = currentTabUrl.hostname;
-      let timerObject = new Timer();
 
       console.log(
         `currentTabHostname: ${currentTabHostname}, inputLinkHost: ${inputLinkHost}`
       );
 
-      if (inputLinkHost === currentTabHostname) {
+      if (inputLinkHost === currentTabHostname && !timerRunning) {
         console.log("You are watching on the specified website!");
         timerObject.stop = false;
+        timerRunning = true;
         timerObject.startTimer(totalTime, countdownDiv);
-      } else {
+      } else if (inputLinkHost !== currentTabHostname && timerRunning) {
         // stop timer
         // record the remaining time
         // Use the remaining time to trigger the timer once go to the website again
         // invoke check if using
+        clearInterval(timerObject.countdown);
         timerObject.stop = true;
+        timerRunning = false;
         // remainingTime = startTimer(remainingTime, countdownDiv, true);
       }
     });
-  }, 1000);
+  }, 2000);
 }
 
 document.getElementById("submit").addEventListener("click", returnText);
