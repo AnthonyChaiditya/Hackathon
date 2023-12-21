@@ -1,10 +1,11 @@
 {
-  "name": "Time Tracker Extensions",
+  "name": "Time Tracker Extension",
   "description": "Extension that tracks the time that a user spends on a specific website",
   "version": "1.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "extension.html",
     "default_icon": "images/hourglass-96.png"
-  }
+  },
+  "permissions": ["tabs"]
 }
