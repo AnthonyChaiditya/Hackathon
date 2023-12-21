@@ -9,7 +9,7 @@ class Timer {
       hours,
       minutes,
       seconds;
-    console.log(`Start timer, current time: ${timer}`);
+
     this.countdown = setInterval(function () {
       hours = parseInt(timer / 3600, 10);
       minutes = parseInt((timer % 3600) / 60, 10);
@@ -21,17 +21,16 @@ class Timer {
 
       display.textContent = hours + ":" + minutes + ":" + seconds;
 
-      if (--timer < 0) {
+      if (--timer === 0) {
         alert(`Time's Up Loser!`);
         clearInterval(this.countdown);
       }
 
-      console.log(typeof this.stop);
-      if (this.stop === true) {
-        console.log(`Here: should stop ${this.stop}, timer ${timer}`);
-        clearInterval(countdown);
-        return timer;
-      }
+      //   if (this.stop === true) {
+      //     console.log(`Here: should stop ${this.stop}, timer ${timer}`);
+      //     clearInterval(countdown);
+      //     return timer;
+      //   }
     }, 1000);
   }
 }
@@ -56,6 +55,7 @@ function returnText() {
   let timerObject = new Timer();
 
   let timerRunning = false;
+  let checkRemaining = false;
 
   const checkIfUsing = setInterval(function () {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -71,6 +71,15 @@ function returnText() {
         console.log("You are watching on the specified website!");
         timerObject.stop = false;
         timerRunning = true;
+        if (checkRemaining) {
+          const remainTimeArray = countdownDiv.textContent.split(":");
+          totalTime =
+            (Number(remainTimeArray[0]) * 60 + Number(remainTimeArray[1])) *
+              60 +
+            Number(remainTimeArray[2]);
+        }
+        checkRemaining = true;
+        console.log(`Current total time ${totalTime}`);
         timerObject.startTimer(totalTime, countdownDiv);
       } else if (inputLinkHost !== currentTabHostname && timerRunning) {
         // stop timer
@@ -83,7 +92,7 @@ function returnText() {
         // remainingTime = startTimer(remainingTime, countdownDiv, true);
       }
     });
-  }, 2000);
+  }, 1000);
 }
 
 document.getElementById("submit").addEventListener("click", returnText);
