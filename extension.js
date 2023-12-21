@@ -21,7 +21,7 @@ class Timer {
 
       display.textContent = hours + ":" + minutes + ":" + seconds;
 
-      if (--timer === 0) {
+      if (--timer <= 0) {
         alert(`Time's Up Loser!`);
         clearInterval(this.countdown);
       }
