@@ -3,13 +3,21 @@
     <title>Time Tracker</title>
   </head>
   <body>
-    <img src="hourglass-96.png" id="hourglassImage" />
+    <img src="images/hourglass-96.png" id="hourglassImage" />
     <form>
       <label for="website">Please input the website link:</label><br />
-      <input type="text" id="website" name="website" />
+      <input type="text" id="website" name="website" /><br />
       <label for="time-to-spend">Max time to spend:</label><br />
-      <input type="number" id="time-hour" name="time-hour" max="12" />
-      <input type="number" id="time-minute" name="time-minute" max="60" />
+      <input type="number" id="time-hour" name="time-hour" max="12" min="0" />
+      <label for="text-time-hour">Hour(s)</label><br />
+      <input
+        type="number"
+        id="time-minute"
+        name="time-minute"
+        max="60"
+        min="0"
+      />
+      <label for="text-time-minute">Minute(s)</label><br />
       <button id="submit">Submit</button>
     </form>
   </body>
