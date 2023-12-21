@@ -7,3 +7,15 @@ Brainstorming: 6:55pm
 6. 
 
 
+
+Steps:
+1. figure out the way to read the input done!**
+1.1 let the form disappear
+2. Figure out how to record time/do a count down in javascript done~
+
+
+3. Figure out how to track the time spend in a specific website
+4. pop out an alert
+
+5. find stretch materials and add to alert
+6. add music to the waiting time period ?
