@@ -5,20 +5,26 @@
   <body>
     <img src="images/hourglass-96.png" id="hourglassImage" />
     <form>
-      <label for="website">Please input the website link:</label><br />
-      <input type="text" id="website" name="website" /><br />
-      <label for="time-to-spend">Max time to spend:</label><br />
-      <input type="number" id="time-hour" name="time-hour" max="12" min="0" />
-      <label for="text-time-hour">Hour(s)</label><br />
-      <input
-        type="number"
-        id="time-minute"
-        name="time-minute"
-        max="60"
-        min="0"
-      />
-      <label for="text-time-minute">Minute(s)</label><br />
-      <button id="submit">Submit</button>
+      <p>Please input the website link:</p>
+      <input type="text" id="website" name="website" placeholder="Link" />
+      <p>Max time to spend:</p>
+      <p>
+        Hour(s)
+        <input type="number" id="time-hour" name="time-hour" max="12" min="0" />
+      </p>
+      <p>
+        Minute(s)
+        <input
+          type="number"
+          id="time-minute"
+          name="time-minute"
+          max="60"
+          min="0"
+        />
+      </p>
+      <!-- <button id="submit" onclick="returnText()">Submit</button> -->
+      <button id="submit" type="button"">Submit</button>
     </form>
+    <script src="extension.js"></script>
   </body>
 </html>
